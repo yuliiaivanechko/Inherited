@@ -72,26 +72,36 @@ class C
         }
 };
 
-class D
+class D : virtual public A, virtual public B, virtual public C
 {
-
     int val;
-    public:
-        //Initially val is 1
-         D()
+public:
+     D()
+     {
+         val = 1;
+     }
+
+     void update_val(int new_val)
+     {
+         while (new_val % 2 == 0)
          {
-             val = 1;
+             this -> A::func(val);
+             new_val /= 2;
          }
-
-
-         //Implement this function
-         void update_val(int new_val)
+         while (new_val % 3 == 0)
          {
-
+             this -> B::func(val);
+             new_val /= 3;
+         }
+         while (new_val % 5 == 0)
+         {
+             this -> C::func(val);
+             new_val /= 5;
+         }
             
-         }
-         //For Checking Purpose
-         void check(int); //Do not delete this line.
+     }
+        
+    void check(int);
 };
 
 void D::check(int new_val)
